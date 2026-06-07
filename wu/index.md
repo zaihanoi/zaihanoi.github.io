@@ -13,4 +13,3 @@ Dưới đây là danh sách toàn bộ các máy tôi đã giải, được ph�
 | (Sắp có) | ... | ... | ... |
 
 ---
-*Hoặc bạn có thể tự động liệt kê các folder con nếu biết dùng plugin Jekyll.*
