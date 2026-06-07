@@ -1,0 +1,5 @@
+theme: jekyll-theme-primer
+collections:
+  wu:
+    output: true
+    permalink: /wu/:path/
