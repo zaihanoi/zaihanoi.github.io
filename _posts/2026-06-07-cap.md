@@ -1,3 +1,8 @@
+---
+layout: post
+title: "Write-up máy Cap"
+date: 2026-06-07
+---
 # WRITE UP CAP - HTB MACHINE
 ## MY MAIN IDEA AND WALKTHROUGH:
 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
@@ -135,6 +140,8 @@ cat user.txt
       root
       ```
    - Hurray! We operated Privilege Escalation succesfully. Now we can gain the root key
+  
+
    ```bash
    root@cap:/home# cd /root
    root@cap:/root# ls
@@ -142,6 +149,7 @@ cat user.txt
    root@cap:/root# cat root.txt
    <ROOT_KEY>
    ```
+
 
 ## THING I LEARNT AFTER THIS LAB:
 - Do not spent to much time in web enum/fuzzing step
