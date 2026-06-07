@@ -9,7 +9,7 @@ Dưới đây là danh sách toàn bộ các máy tôi đã giải, được ph�
 
 | Tên máy | Độ khó | Thể loại | Link chi tiết |
 | :--- | :--- | :--- | :--- |
-| Cap | Easy | Linux | [Xem ngay](/2026/06/07/cap.html) |
+| Cap | Easy | Linux | [Xem ngay](wu/cap/cap.html) |
 | (Sắp có) | ... | ... | ... |
 
 ---
