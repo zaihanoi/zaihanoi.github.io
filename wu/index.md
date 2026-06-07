@@ -1,10 +1,16 @@
 ---
 layout: default
-title: "Danh sách các bài Write-ups"
+title: "Kho lưu trữ Write-ups"
 ---
 
-# 📂 Các bài Write-ups đã thực hiện
+# 📚 Tất cả Write-ups của Zaihanoi
 
-Dưới đây là danh sách các máy CTF/HTB mà tôi đã giải:
+Dưới đây là danh sách toàn bộ các máy tôi đã giải, được phân loại theo danh mục:
 
-* [Lab Cap](/wu/cap/cap.md)
+| Tên máy | Độ khó | Thể loại | Link chi tiết |
+| :--- | :--- | :--- | :--- |
+| Cap | Easy | Windows | [Xem ngay](/wu/cap/) |
+| (Sắp có) | ... | ... | ... |
+
+---
+*Hoặc bạn có thể tự động liệt kê các folder con nếu biết dùng plugin Jekyll.*
