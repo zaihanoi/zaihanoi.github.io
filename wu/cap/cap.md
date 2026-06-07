@@ -142,6 +142,7 @@ cat user.txt
    root@cap:/root# cat root.txt
    <ROOT_KEY>
    ```
+
 ## THING I LEARNT AFTER THIS LAB:
 - Do not spent to much time in web enum/fuzzing step
 - Try to examine the website, url carefully
