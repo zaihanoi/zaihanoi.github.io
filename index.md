@@ -9,9 +9,9 @@ Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học 
 
 ### 📂 Danh mục bài viết
 
-* **[Write_up](/wu/)**: Write-up về những lab tôi đã khám phá
-  * [Cap-HTB](wu/cap/cap.md)
-<br>
-* **Blog cá nhân**: Những suy nghĩ và kiến thức tôi tổng hợp được..
+ * **[Write_up](/wu/)**: Write-up về những lab tôi đã khám phá
+   * [Cap-HTB](wu/cap/cap.md)
+ <br>
+ * **[Blog cá nhân](/blog/)**: Những suy nghĩ và kiến thức tôi tổng hợp được..
 ---
 *Follow me on: [GitHub](https://github.com/zaihanoi)*
