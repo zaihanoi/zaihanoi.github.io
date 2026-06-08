@@ -10,7 +10,7 @@ Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học 
 ### 📂 Danh mục bài viết
 
 - **[Write_up](/wu/)**
-  - [Cap-HTB](/wu/cap/)
+  - [Cap-HTB](/wu/cap/cap.md)
 
 - **[Blog cá nhân](/blog/)**
 ---
