@@ -7,7 +7,7 @@ title: "Zaihanoi's Security Lab"
 
 Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học tập, Write-up (WU) và các nghiên cứu bảo mật.
 
-### 📂 Danh mục bài viết
+## 📂 Danh mục bài viết
 
 - **[Write_up](/wu/)**
   - [Cap-HTB](/wu/cap/cap.md)
