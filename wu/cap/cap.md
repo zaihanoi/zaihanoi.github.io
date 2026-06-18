@@ -9,7 +9,7 @@ date: 2026-06-07
 2. OK! now check the HTB website and get the target IP and we are ready to startttt: 
    ![alt text](images/image.png)
 3. My first idea is doing some basic scans with this IP address. I always start this step with `Nmap`:
- ```bash
+```bash
 nmap -sV --open <IP_ADDRESS>                      
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-06-06 04:38 +07
 Nmap scan report for <IP_ADDRESS>
@@ -25,6 +25,7 @@ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 16.46 seconds
 ```
+
 I used the `-sV` flag to scan the version of services are running and `--open` flag to show the open ports only. In the first scan, I did not use `-p-` flag to scan ALL the ports because it takes many time and my computer resources to scan, so in my opinion, if the first time scan returns nothing helpful I will use this flag. (Note: Another useful flag is `-sC`, which runs default `Nmap` scripts against the discovered ports).
 
 4. The `nmap` scan result show us that port 21 (ftp) and 22 (ssh) are opening so I tried to login to ftp and ssh using anonymous acount (maybe the services do not ask password when user login with anonymous account) but it was not succesful.
