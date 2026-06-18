@@ -1,8 +1,12 @@
 theme: jekyll-theme-primer
+
 collections:
   wu:
     output: true
     permalink: /wu/:path/
+
 markdown: kramdown
+
 kramdown:
   input: GFM
+  hard_wrap: false
