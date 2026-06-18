@@ -10,6 +10,6 @@ Dưới đây là danh sách toàn bộ các máy tôi đã giải, được ph�
 | Tên máy | Độ khó | Thể loại | Link chi tiết |
 | :--- | :--- | :--- | :--- |
 | Cap | Easy | Linux | [Xem ngay](cap/cap.md) |
-| 2million | Easy | Linux | [Xem ngay](2million/2million.md) |
+| (Sắp có) | ... | ... | ... |
 
 ---
