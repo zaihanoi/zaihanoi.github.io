@@ -3,3 +3,6 @@ collections:
   wu:
     output: true
     permalink: /wu/:path/
+markdown: kramdown
+kramdown:
+  input: GFM
