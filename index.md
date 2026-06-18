@@ -7,16 +7,13 @@ title: "Zaihanoi's Security Lab"
 
 Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học tập, Write-up (WU) và các nghiên cứu bảo mật.
 
-### 📂 Danh mục bài viết
-<ul style="list-style-type: none; padding-left: 0;">
-{% for item in site.wu %}
-  <li style="margin-bottom: 8px;">
-    <strong><a href="{{ item.url }}">{{ item.title }}</a></strong>
-    <span style="color: #666; font-size: 0.9em;"> — {{ item.date | date: "%d/%m/%Y" }}</span>
-  </li>
-{% endfor %}
-</ul>
+## 📂 Danh mục bài viết
 
-* **[Blog cá nhân](/blog/)**: Những suy nghĩ và kiến thức tôi tổng hợp được.
+- **[Write_up](/wu/)**
+  - [Cap-HTB](/wu/cap/cap.md)
+  - [2million-HTB](/wu/2million/2million.md)
+- **[Blog cá nhân](/blog/)**
+
 ---
+
 *Follow me on: [GitHub](https://github.com/zaihanoi)*
