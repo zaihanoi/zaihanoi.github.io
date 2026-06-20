@@ -5,12 +5,12 @@ date: 2026-06-07
 ---
 # WRITE UP CAP - HTB MACHINE
 ## MY MAIN IDEA AND WALKTHROUGH:
-1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
-2. OK! now check the HTB website and get the target IP and we are ready to startttt:
+### Step 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
+### Step 2. OK! now check the HTB website and get the target IP and we are ready to startttt:
     
    ![alt text](images/image.png)
    
-3. My first idea is doing some basic scans with this IP address. I always start this step with `Nmap`:
+### Step 3. My first idea is doing some basic scans with this IP address. I always start this step with `Nmap`:
 
  ```bash
 nmap -sV --open <IP_ADDRESS>                      
@@ -31,12 +31,12 @@ Nmap done: 1 IP address (1 host up) scanned in 16.46 seconds
 
 I used the `-sV` flag to scan the version of services are running and `--open` flag to show the open ports only. In the first scan, I did not use `-p-` flag to scan ALL the ports because it takes many time and my computer resources to scan, so in my opinion, if the first time scan returns nothing helpful I will use this flag. (Note: Another useful flag is `-sC`, which runs default `Nmap` scripts against the discovered ports).
 
-4. The `nmap` scan result show us that port 21 (ftp) and 22 (ssh) are opening so I tried to login to ftp and ssh using anonymous acount (maybe the services do not ask password when user login with anonymous account) but it was not succesful.
-5. As we can see from the `nmap` scan result, the target IP address has port 80 (http) open. So, my next step is checking the website of this target IP address. 
+### Step 4. The `nmap` scan result show us that port 21 (ftp) and 22 (ssh) are opening so I tried to login to ftp and ssh using anonymous acount (maybe the services do not ask password when user login with anonymous account) but it was not succesful.
+### Step 5. As we can see from the `nmap` scan result, the target IP address has port 80 (http) open. So, my next step is checking the website of this target IP address. 
 
    ![alt text](images/image-1.png)
    
-6. Another way to approach is trying to fuzzing web. `ffuf` is my favourite tool for web fuzzing/ enumeration. First, I ran the most basic scan in `ffuf` to find hidden url, directories:
+### Step 6. Another way to approach is trying to fuzzing web. `ffuf` is my favourite tool for web fuzzing/ enumeration. First, I ran the most basic scan in `ffuf` to find hidden url, directories:
 
 ```bash
 ffuf -w /usr/share/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-small.txt:FUZZ -u http:/
@@ -73,7 +73,7 @@ capture                 [Status: 302, Size: 220, Words: 21, Lines: 4, Duration: 
 
 OK! after the scanning process, we have something to discover: `data`, `ip` and `netstat`. But after checking the website, I could not find anything useful.
 
-7. My next step is checking more carefully the website and after a while, I see something interesting:
+### Step 7. My next step is checking more carefully the website and after a while, I see something interesting:
 
    ![alt text](images/image-4.png)
    
@@ -84,14 +84,14 @@ OK! after the scanning process, we have something to discover: `data`, `ip` and 
 
 We did it !! The next step is download `.pcap` file and examine it using `whireshark`.
 
-8. Examine `.pcap` file using `Wireshark`
+### Step 8. Examine `.pcap` file using `Wireshark`
 From the `nmap` scan result above, we know that the `FTP` port is opening. So, at first, I filtered the `pcap` file and tried to know the conversation between `Nathan` and server using `File Transfer Protocol`:
 
    ![alt text](images/image-6.png)
 
 We can see clearly the `username: Nathan` and the `password:` so we can try to login to FTP port.
 
-9. Login FTP and gain user key
+### Step 9. Login FTP and gain user key
 With the password, I succesfully accessed Nathan's account and download `user.txt` file:
 
 ```bash
@@ -127,7 +127,7 @@ cat user.txt
 <USER_KEY>
 ```
 
-10. Privilege Escalation & try to gain the root key
+### Step 10. Privilege Escalation & try to gain the root key
    
    - Next step, I tried to login to `ssh` with nathan's account and it was successfull:
 
