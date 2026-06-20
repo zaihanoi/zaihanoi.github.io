@@ -353,7 +353,7 @@ HTB Godfather
 
 ### Step 20.   In this mail, the sender noticed about one important detail: this server had `OverlayFS / FUSE` vulnerability (CVE-2023-0386) which could lead to `escalating privilege`!! So, I searched for this vulnerability and how to exploit it. I found the payload to exploit this vulnerability on the Internet (You can visit this website and learn more about how to exploit this vulnerability: `https://hackindex.io/vulnerabilities/CVE-2023-0386`)
 ### Step 21.  Follow the instruction on the website, I gained the `root` privilege:
-   	* On my computer:
+   * On my computer:
   
   1. Git and prepared the files.
 
