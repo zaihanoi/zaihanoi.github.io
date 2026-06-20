@@ -6,8 +6,10 @@ date: 2026-06-07
 # WRITE UP CAP - HTB MACHINE
 ## MY MAIN IDEA AND WALKTHROUGH:
 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
-2. OK! now check the HTB website and get the target IP and we are ready to startttt: 
+2. OK! now check the HTB website and get the target IP and we are ready to startttt:
+    
    ![alt text](images/image.png)
+   
 3. My first idea is doing some basic scans with this IP address. I always start this step with `Nmap`:
 
  ```bash
@@ -31,7 +33,9 @@ I used the `-sV` flag to scan the version of services are running and `--open` f
 
 4. The `nmap` scan result show us that port 21 (ftp) and 22 (ssh) are opening so I tried to login to ftp and ssh using anonymous acount (maybe the services do not ask password when user login with anonymous account) but it was not succesful.
 5. As we can see from the `nmap` scan result, the target IP address has port 80 (http) open. So, my next step is checking the website of this target IP address. 
-![alt text](images/image-1.png)
+
+   ![alt text](images/image-1.png)
+   
 6. Another way to approach is trying to fuzzing web. `ffuf` is my favourite tool for web fuzzing/ enumeration. First, I ran the most basic scan in `ffuf` to find hidden url, directories:
 
 ```bash
