@@ -73,18 +73,24 @@ capture                 [Status: 302, Size: 220, Words: 21, Lines: 4, Duration: 
 
 OK! after the scanning process, we have something to discover: `data`, `ip` and `netstat`. But after checking the website, I could not find anything useful.
 
-
 7. My next step is checking more carefully the website and after a while, I see something interesting:
-![alt text](images/image-4.png)
+
+   ![alt text](images/image-4.png)
+   
    - In the tab Security Snapshot, the website allowed us to download a `.pcap` file. I noticed that the `url` changed when I revisted this tab. The first time the `url` tail was `/data/1` and the second time it changed to `/data/2` and so on...
    - One more detail that I notice that is when accessing the website, I did not have to login and the session was already logged in as Nathan. So, what if we set the `url` tail to `/data/0` ? Maybe we will have the `.pcap` file that show us the conversation between `Nathan` and server.
-     ![alt text](images/image-5.png)
-   We did it !! The next step is download `.pcap` file and examine it using `whireshark`.
+   
+   ![alt text](images/image-5.png)
+
+We did it !! The next step is download `.pcap` file and examine it using `whireshark`.
 
 8. Examine `.pcap` file using `Wireshark`
 From the `nmap` scan result above, we know that the `FTP` port is opening. So, at first, I filtered the `pcap` file and tried to know the conversation between `Nathan` and server using `File Transfer Protocol`:
-![alt text](images/image-6.png)
+
+   ![alt text](images/image-6.png)
+
 We can see clearly the `username: Nathan` and the `password:` so we can try to login to FTP port.
+
 9. Login FTP and gain user key
 With the password, I succesfully accessed Nathan's account and download `user.txt` file:
 
@@ -133,6 +139,7 @@ cat user.txt
    ```
    
    - I tried to use `sudo -l` to check nathan's account permission but I could not find something: ```Sorry, user nathan may not run sudo on cap.```
+
    - So, next, I ued ```getcap -r /usr/ 2>/dev/null``` and I found the way to perform Privilege Escalation:
 
       ```bash
@@ -149,16 +156,16 @@ cat user.txt
       - The `getcap` `-r` flag allowed us to scan in `recursion` mode so we can scan widely.
       - `2>/dev/null` helps eliminate "Permission denied" error messages when scanning files you don't have permission to access.
       After the scanning process, I noticed the line: `/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip`. This line means in the file `/usr/bin/python3.8` user nathan can change user id (`cap_setuid`). We could perform Privilege Escalation in this way because we could change user_id to `0` which is the root's user_id
-   - By using the command ```/usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'``` I could set user_id to `0` and call a new shell with root privilege:
+   - By using the command `/usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'` I could set user_id to `0` and call a new shell with root privilege:
 
       ```bash
       nathan@cap:~$ /usr/bin/python3.8 -c 'import os; os.setuid(0); os.system("/bin/bash")'
       root@cap:~# whoami
       root
       ```
+      
    - Hurray! We operated Privilege Escalation succesfully. Now we can gain the root key
   
-
    ```bash
    root@cap:/home# cd /root
    root@cap:/root# ls
@@ -166,7 +173,6 @@ cat user.txt
    root@cap:/root# cat root.txt
    <ROOT_KEY>
    ```
-
 
 ## THING I LEARNT AFTER THIS LAB:
 - Do not spent to much time in web enum/fuzzing step
