@@ -69,6 +69,7 @@ capture                 [Status: 302, Size: 220, Words: 21, Lines: 4, Duration: 
 
 OK! after the scanning process, we have something to discover: `data`, `ip` and `netstat`. But after checking the website, I could not find anything useful.
 
+
 7. My next step is checking more carefully the website and after a while, I see something interesting:
 ![alt text](images/image-4.png)
    - In the tab Security Snapshot, the website allowed us to download a `.pcap` file. I noticed that the `url` changed when I revisted this tab. The first time the `url` tail was `/data/1` and the second time it changed to `/data/2` and so on...
