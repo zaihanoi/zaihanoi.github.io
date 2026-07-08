@@ -3,7 +3,7 @@ layout: post
 title: "Write-up máy 2million"
 date: 2026-06-18
 ---
-# WRITE UP CAP - HTB MACHINE
+# WRITE UP 2million - HTB MACHINE
 ## MY MAIN IDEA AND WALKTHROUGH:
 ### Step 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
 
