@@ -11,5 +11,6 @@ Dưới đây là danh sách toàn bộ các máy tôi đã giải, được ph�
 | :--- | :--- | :--- | :--- |
 | Cap | Easy | Linux | [Xem ngay](cap/cap.md) |
 | 2million | Easy | Linux | [Xem ngay](2million/2million.md) |
+| Kobold | Easy | Linux | [Xem ngay](kobold/kobold.md) |
 
 ---
