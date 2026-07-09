@@ -1,13 +1,5 @@
 theme: jekyll-theme-primer
 
-collections:
-  wu:
-    output: true
-    permalink: /wu/:path/
-  blog:
-    output: true
-    permalink: /blog/:path/
-
 markdown: kramdown
 
 kramdown:
