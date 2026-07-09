@@ -8,6 +8,7 @@ date: 2026-07-08
 ### Step 1. First of all, we need to connect with the VPN from HTB, using the command: ```sudo openvpn <FILE_NAME>.ovpn```
 
 ### Step 2. OK! now check the HTB website and get the target IP and we are ready to startttt:
+
 ![alt text](images/image.png)
 
 ### Step 3. Using `nmap` to scan generally the target IP address:
@@ -223,15 +224,15 @@ ben@kobold:~$ ./linpeas.sh
 
 ### Step 9. Checking CVEs
 - The `linpeas.sh` scanning process showed us three `CVEs` that might be exploited to execute `privilege escalation`:
-        - 1. ```/usr/lib/snapd/snap-confine cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_setgid,cap_setuid,cap_sys_chroot,cap_sys_ptrace,cap_sys_admin=p```. This was the detail that we previously gained by using `getcap` command. When I checked about this detail on Google, it was found to be `CVE-2026-3888` which could lead to `privilege escalation`
-        - 2. 
+- ```/usr/lib/snapd/snap-confine cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_setgid,cap_setuid,cap_sys_chroot,cap_sys_ptrace,cap_sys_admin=p```. This was the detail that we previously gained by using `getcap` command. When I checked about this detail on Google, it was found to be `CVE-2026-3888` which could lead to `privilege escalation`
+-  
 
 ```
 CVE-2026-43284 (xfrm-ESP): loaded: xfrm_user
 CVE-2026-43500 (rxrpc): autoloadable: rxrpc
 ```
 
-        - 3. 
+-  
 
 ```
 PackageKit version detected: 1.2.8
