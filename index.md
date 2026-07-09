@@ -12,6 +12,7 @@ Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học 
 - **[Write_up](/wu/)**
   - [Cap-HTB](/wu/cap/cap.md)
   - [2million-HTB](/wu/2million/2million.md)
+  - [Kobold-HTB](/wu/kobold/kobold.md)
 - **[Blog cá nhân](/blog/)**
 
 ---
