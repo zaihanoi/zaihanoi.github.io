@@ -3,11 +3,11 @@ layout: default
 title: "Kho lưu trữ Write-ups"
 ---
 
-# 📚 Tất cả Write-ups của Zaihanoi
+# 📚 All Write-ups by Zaihanoi
 
-Dưới đây là danh sách toàn bộ các máy tôi đã giải, được phân loại theo danh mục:
+Complete Write-up Archive:
 
-| Tên máy | Độ khó | Thể loại | Link chi tiết |
+| Machine Name | Difficulty | Category | Write-up Link |
 | :--- | :--- | :--- | :--- |
 | Cap | Easy | Linux | [Xem ngay](cap/cap.md) |
 | 2million | Easy | Linux | [Xem ngay](2million/2million.md) |

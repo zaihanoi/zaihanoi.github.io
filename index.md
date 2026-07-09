@@ -3,17 +3,14 @@ layout: home
 title: "Zaihanoi's Security Lab"
 ---
 
-# Chào mừng đến với website của tôi!
+# Welcome to my website!
 
-Tôi là một Security Enthusiast, nơi tôi lưu trữ các tài liệu học tập, Write-up (WU) và các nghiên cứu bảo mật.
+I am a Security Enthusiast. This is where I document my learning journey, share write-ups (WUs), and publish my security research.
 
-## 📂 Danh mục bài viết
+## 📂 Explore Topics
 
-- **[Write_up](/wu/)**
-  - [Cap-HTB](/wu/cap/cap.md)
-  - [2million-HTB](/wu/2million/2million.md)
-  - [Kobold-HTB](/wu/kobold/kobold.md)
-- **[Blog cá nhân](/blog/)**
+- **[Write_up 📝](/wu/)**
+- **[Blog ✍️](/blog/)**
 
 ---
 
