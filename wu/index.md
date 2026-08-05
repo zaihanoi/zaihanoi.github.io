@@ -12,5 +12,6 @@ Complete Write-up Archive:
 | Cap | Easy | Linux | [Xem ngay](cap/cap.md) |
 | 2million | Easy | Linux | [Xem ngay](2million/2million.md) |
 | Kobold | Easy | Linux | [Xem ngay](kobold/kobold.md) |
+| LFI_Skills_Assessment | Easy | Linux | [Xem ngay](LFI_Skills_Assessment/lfi_skill_assessment.md) |
 
 ---
