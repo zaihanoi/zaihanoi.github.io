@@ -13,5 +13,6 @@ Complete Write-up Archive:
 | 2million | Easy | Linux | [Xem ngay](2million/2million.md) |
 | Kobold | Easy | Linux | [Xem ngay](kobold/kobold.md) |
 | LFI_Skills_Assessment | Easy | Linux | [Xem ngay](LFI_Skills_Assessment/lfi_skill_assessment.md) |
+| CCTV | Easy | Linux | [Xem ngay](CCTV/cctv.md) |
 
 ---
