@@ -14,5 +14,6 @@ Complete Write-up Archive:
 | Kobold | Easy | Linux | [Xem ngay](kobold/kobold.md) |
 | LFI_Skills_Assessment | Easy | Linux | [Xem ngay](LFI_Skills_Assessment/lfi_skill_assessment.md) |
 | CCTV | Easy | Linux | [Xem ngay](CCTV/cctv.md) |
+| Orion | Easy | Linux | [Xem ngay](orion/orion.md) |
 
 ---
