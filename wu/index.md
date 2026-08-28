@@ -15,11 +15,11 @@ Complete Write-up Archive:
 
 | Machine Name | Difficulty | Category | Write-up Link |
 | :--- | :--- | :--- | :--- |
-| Cap | Easy | Linux | [Xem ngay](cap/cap.md) |
-| 2million | Easy | Linux | [Xem ngay](2million/2million.md) |
-| Kobold | Easy | Linux | [Xem ngay](kobold/kobold.md) |
-| LFI_Skills_Assessment | Easy | Linux | [Xem ngay](LFI_Skills_Assessment/lfi_skill_assessment.md) |
-| CCTV | Easy | Linux | [Xem ngay](CCTV/cctv.md) |
-| Orion | Easy | Linux | [Xem ngay](orion/orion.md) |
+| Cap | Easy | Linux | [Click here](cap/cap.md) |
+| 2million | Easy | Linux | [Click here](2million/2million.md) |
+| Kobold | Easy | Linux | [Click here](kobold/kobold.md) |
+| LFI_Skills_Assessment | Easy | Linux | [Click here](LFI_Skills_Assessment/lfi_skill_assessment.md) |
+| CCTV | Easy | Linux | [Click here](CCTV/cctv.md) |
+| Orion | Easy | Linux | [Click here](orion/orion.md) |
 
 ---
