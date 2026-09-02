@@ -8,17 +8,17 @@ date: 2026-07-08
 K-means is one of the most basic algorithm to divide a set of data points into K clusters. Nowadays, K-means is still used in many fields of Machine Learning (ML) and Deep Learning (DL) because of being easy-to-understand, easy-to-install and high performance in spite of requiring fewer computer resources than other clustering algorithms.
 ## 1. Base Knowledge
 Basically, this is how K-means clustering algorithm works:
-- You have `N` data points $x_i$ with ($1 \leq i \leq N ; i \in Z$).
+- You have `N` data points $$x_i$$ with ($1 \leq i \leq N ; i \in Z$).
 - `N` data points are put in a set of data points called `X`.
 - Your target is dividing those `N` data points into K ($K<N; K \in Z^+$) clusters, similar data points will be put into one cluster.
-- So you have to give each data point a label to show that what cluster contains that data. There are two ways to name data labels. The first way is setting the label name as `k` ($1\leq k \leq K; k \in Z$), for example the data point $x_1$ has label `k` = 5 so it is in the cluster numbered 5. 5 is only `a name to identify clusters`, we will not use `k` to compare clusters, arrange them or for other purposes.
-- Another way is using a flat (1 x K) matrix called $y_i$ for data point $x_i$. If $x_i$ is in cluster `k`, the $y_{ik}$  element will equal `1` and other `K-1` elements in matrix $y_i$ will equal `0`. For example, the data point $x_1$ is in cluster number 2. If there are 5 clusters all together, the label matrix $y_1$ of $x_1$ is [0,1,0,0,0].
-- Because there are `N` data points so if you combine all matrix $y_i$ together vertically we will have matrix `Y` (N x K) containing all labels of $x_i$.
+- So you have to give each data point a label to show that what cluster contains that data. There are two ways to name data labels. The first way is setting the label name as `k` ($$1\leq k \leq K; k \in Z$$), for example the data point $$x_1$$ has label `k` = 5 so it is in the cluster numbered 5. 5 is only `a name to identify clusters`, we will not use `k` to compare clusters, arrange them or for other purposes.
+- Another way is using a flat (1 x K) matrix called $y_i$ for data point $$x_i$$. If $$x_i$$ is in cluster `k`, the $y_{ik}$  element will equal `1` and other `K-1` elements in matrix $y_i$ will equal `0`. For example, the data point $$x_1$$ is in cluster number 2. If there are 5 clusters all together, the label matrix $y_1$ of $$x_1$$ is [0,1,0,0,0].
+- Because there are `N` data points so if you combine all matrix $y_i$ together vertically we will have matrix `Y` (N x K) containing all labels of $$x_i$$.
 - In cluster number `k`, there is a centre point (`centroid`) called $m_k$ ($1 \leq j \leq K ; j \in Z$). There is a matrix called `M` containing all K `centroids`.
 ## 2. Mathematical Analysis
-As I said above, similar data points will be put into one cluster. So, what is "similar"? If we are working with text documents, similar is, for example, words or sentences that have the same structure of characters. But, what if we work with different forms of data such as picture? Two pictures are similar do not mean that their pixels are perfectly on the same location or painted with the same color. So, in `ML` and `DL` where data always represented by their feature vector, there is a unique way to define two data points are similar using the distance between vectors. One of the most popular algorithm to calculate distance between vectors is `Euclid algorithm`. For example, there are two vectors $x_1$ and $x_2$ in space. According to `Euclid algorithm`, the distance between $x_1$ and $x_2$ is $||x_1 - x_2||^2_2$. In this post, all calculate distance functions use `Euclid algorithm`.
+As I said above, similar data points will be put into one cluster. So, what is "similar"? If we are working with text documents, similar is, for example, words or sentences that have the same structure of characters. But, what if we work with different forms of data such as picture? Two pictures are similar do not mean that their pixels are perfectly on the same location or painted with the same color. So, in `ML` and `DL` where data always represented by their feature vector, there is a unique way to define two data points are similar using the distance between vectors. One of the most popular algorithm to calculate distance between vectors is `Euclid algorithm`. For example, there are two vectors $$x_1$$ and $x_2$ in space. According to `Euclid algorithm`, the distance between $$x_1$$ and $x_2$ is $||x_1 - x_2||^2_2$. In this post, all calculate distance functions use `Euclid algorithm`.
 ### 2.1 Loss function
-We will talk about the distance between only one data point $x_i$ and `centroid` $m_k$ if $x_i$ is put into cluster `k`: $||x_i - m_k||^2_2$. Because it is assigned to cluster `k` so the matrix $y_i$ of $x_i$ has element $y_{ik}$=1 so we have function:
+We will talk about the distance between only one data point $$x_i$$ and `centroid` $m_k$ if $$x_i$$ is put into cluster `k`: $||x_i - m_k||^2_2$. Because it is assigned to cluster `k` so the matrix $y_i$ of $$x_i$$ has element $y_{ik}$=1 so we have function:
 
 
 $||x_i - m_k||^2_2$ = $y_{ik} . ||x_i - m_k||^2_2$ (1)
@@ -27,7 +27,7 @@ Other `K-1` elements in $y_i$ equal 0 so we could also write the function (1) th
 
 $||x_i - m_k||^2_2$ = $y_{ik} . ||x_i - m_k||^2_2$ = $\sum_{j=1}^{K} y_{ij} . ||x_i - m_j||^2_2$ (2)
 
-Function (2) is a general function to calculate the distance between only one data point $x_i$ to its `centroid` $m_k$.
+Function (2) is a general function to calculate the distance between only one data point $$x_i$$ to its `centroid` $m_k$.
 
 From function (2), we could build a general function to find the mean distance between all `N` data points to their `centroid`:
 
