@@ -8,7 +8,7 @@ date: 2026-07-08
 K-means is one of the most basic algorithm to divide a set of data points into K clusters. Nowadays, K-means is still used in many fields of Machine Learning (ML) and Deep Learning (DL) because of being easy-to-understand, easy-to-install and high performance in spite of requiring fewer computer resources than other clustering algorithms.
 ## 1. Base Knowledge
 Basically, this is how K-means clustering algorithm works:
-- You have `N` data points x_i with (1 \leq i \leq N ; i \in Z).
+- You have `N` data points $x_i$ with ($1 \leq i \leq N ; i \in Z$).
 - `N` data points are put in a set of data points called `X`.
 - Your target is dividing those `N` data points into K ($K<N; K \in Z^+$) clusters, similar data points will be put into one cluster.
 - So you have to give each data point a label to show that what cluster contains that data. There are two ways to name data labels. The first way is setting the label name as `k` ($1\leq k \leq K; k \in Z$), for example the data point $x_1$ has label `k` = 5 so it is in the cluster numbered 5. 5 is only `a name to identify clusters`, we will not use `k` to compare clusters, arrange them or for other purposes.
