@@ -21,5 +21,6 @@ Complete Write-up Archive:
 | LFI_Skills_Assessment | Easy | Linux | [Click here](LFI_Skills_Assessment/lfi_skill_assessment.md) |
 | CCTV | Easy | Linux | [Click here](CCTV/cctv.md) |
 | Orion | Easy | Linux | [Click here](orion/orion.md) |
+| Getting_Started_Assessment (Vietnamese) | Easy | Linux | [Click here](https://viblo.asia/p/my-first-machine-h-t-b-QyJKz6DQ4Me) |
 
 ---
