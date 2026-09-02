@@ -76,7 +76,7 @@ Now I will find the minimum value of function (4):
 
 - Calculate the `first derivative` of function (4):
 
-The derivative of $$f(m_j) = ||x_i - m_j||^2_2$$ is $$(-1).2(x_i-m_j) = 2.(m_j-x_i)$$.
+The derivative of $$||x_i - m_j||^2_2$$ is $$(-1).2(x_i-m_j) = 2.(m_j-x_i)$$.
 
 So the derivative of function (4) is: $$\frac{2}{N}.\sum_{i=1}^{N} y_{ij}.(m_j-x_i)$$.
 
