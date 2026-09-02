@@ -3,8 +3,9 @@ layout: post
 title: "Blog AI K_means"
 date: 2026-07-08
 ---
+⚠️ Note: This post was inspired by the book "Machine Learning Cơ bản" (Basic of Machine Learning) by Vu Huu Tiep.
 # K-MEANS CLUSTERING
-K-means is one of the most basic algorithm to divide a set of data points into K clusters. Nowadays, K-means is still used in many fields of Machine Learning (ML) and Deep Learning (DL) because of being easy-to-understand, easy-to-install and high performance in spite of requiring fewer computer resources than other clustering algorithms..
+K-means is one of the most basic algorithm to divide a set of data points into K clusters. Nowadays, K-means is still used in many fields of Machine Learning (ML) and Deep Learning (DL) because of being easy-to-understand, easy-to-install and high performance in spite of requiring fewer computer resources than other clustering algorithms.
 ## 1. Base Knowledge
 Basically, this is how K-means clustering algorithm works:
 - You have `N` data points $x_i$ with ($1 \leq i \leq N ; i \in Z$).
