@@ -3,4 +3,10 @@ layout: default
 title: "Kho lưu trữ Blog AI"
 ---
 
-# My first AI blog post is coming soon. Stay tuned! ⏳
+# 📚 All AI Blogs by Zaihanoi
+
+| Name | Category | Blog Link |
+| :--- | :--- | :--- |
+| K-means Clustering | Machine Learning | [Click here](K_means/k_means.md) |
+
+---
