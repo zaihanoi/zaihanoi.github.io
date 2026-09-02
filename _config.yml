@@ -1,5 +1,5 @@
+# Theme & Markdown Settings
 theme: jekyll-theme-primer
-
 markdown: kramdown
 
 kramdown:
@@ -7,3 +7,10 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
   auto_ids: true
+  math_engine: mathjax
+
+plugins:
+  - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-feed
+  - jekyll-sitemap
