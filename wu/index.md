@@ -22,5 +22,6 @@ Complete Write-up Archive:
 | CCTV | Easy | Linux | [Click here](CCTV/cctv.md) |
 | Orion | Easy | Linux | [Click here](orion/orion.md) |
 | Getting_Started_Assessment (Vietnamese) | Easy | Linux | [Click here](https://viblo.asia/p/my-first-machine-h-t-b-QyJKz6DQ4Me) |
+| Reactor | Easy | Linux | [Click here](reactor/reactor.md) |
 
 ---
