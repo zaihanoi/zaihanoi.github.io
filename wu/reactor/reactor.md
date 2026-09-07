@@ -30,9 +30,9 @@ Nmap done: 1 IP address (1 host up) scanned in 16.11 seconds
 `nmap` scanning result showed that there are two open ports on target IP address: `22` and `3000`. I will scan deeply these ports with `nmap` `-sC` and `-sV` flag:
 
 ```bash
-nmap -sC -sV 10.129.245.214 -p 22,3000
+nmap -sC -sV <IP_ADDRESS> -p 22,3000
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-08-31 08:07 +07
-Nmap scan report for 10.129.245.214
+Nmap scan report for <IP_ADDRESS>
 Host is up (0.097s latency).
 
 PORT     STATE SERVICE VERSION
