@@ -9,5 +9,6 @@ title: "Kho lưu trữ Blog AI"
 | :--- | :--- | :--- |
 | K-means Clustering | Machine Learning | [Click here](K_means/k_means.md) |
 | Linear Regression | Machine Learning | [Click here](Linear_regression/linear_regression.md) |
+| K-nearest neighbors | Machine Learning | [Click here](kNN/kNN.md) |
 
 ---
